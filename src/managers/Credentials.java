@@ -32,6 +32,8 @@ public enum Credentials {
 		x = this.gapBetweenBorders;
 		y = this.gapBetweenBorders;
 		this.cImageViewIndicator = new Vector2(x, y);
+		
+		System.out.println(this.dFrame.y - 50);
 
 	}
 
