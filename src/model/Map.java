@@ -2,7 +2,11 @@ package model;
 
 import java.lang.reflect.InvocationTargetException;
 
+import countries.Brunei;
 import countries.Country;
+import countries.Indonesia;
+import countries.Malaysia;
+import countries.Philippines;
 import countries.Vietnam;
 import enums.ELayerZ;
 import managers.Credentials;
@@ -40,6 +44,10 @@ public enum Map implements IImageViewAble, IMouseEventAble {
 	private void createCountries() {
 
 		addCountry(Vietnam.class);
+		addCountry(Malaysia.class);
+		addCountry(Philippines.class);
+		addCountry(Brunei.class);
+		addCountry(Indonesia.class);
 
 	}
 

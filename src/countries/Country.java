@@ -1,17 +1,19 @@
 package countries;
 
-import enums.ENation;
 import influence.InfluenceDiplomatic;
 import influence.InfluenceEconomic;
 import managers.Credentials;
+import nations.Nation;
+import nations.NationChina;
+import nations.NationUS;
 import utils.Enums.DirectionEnum;
 import utils.HashMap;
 import utils.Vector2;
 
 public abstract class Country {
 
-	private HashMap<ENation, InfluenceEconomic> mapNationInfluenceEconomic = null;
-	private HashMap<ENation, InfluenceDiplomatic> mapNationInfluenceDiplomatic = null;
+	private HashMap<Class<? extends Nation>, InfluenceEconomic> mapNationInfluenceEconomic = null;
+	private HashMap<Class<? extends Nation>, InfluenceDiplomatic> mapNationInfluenceDiplomatic = null;
 
 	public Country() {
 
@@ -33,23 +35,38 @@ public abstract class Country {
 
 		x += Credentials.INSTANCE.cMap.x;
 		y += Credentials.INSTANCE.cMap.y;
-		
-		System.out.println(x + " " + y);
 
 		y -= 22.5;
 
-		System.out.println(x + " " + y);
+		this.mapNationInfluenceEconomic.put(NationUS.class, new InfluenceEconomic(
+				getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
 
-		this.mapNationInfluenceEconomic.put(ENation.US, new InfluenceEconomic(getInfluenceSize(), 2,
-				new Vector2(x - 56.5, y), DirectionEnum.LEFT));
+		this.mapNationInfluenceEconomic.put(NationChina.class, new InfluenceEconomic(
+				getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
+
+		// influence diplomatic
+
+		x = getCenterCoordinates().x;
+		y = getCenterCoordinates().y;
+
+		x += Credentials.INSTANCE.cMap.x;
+		y += Credentials.INSTANCE.cMap.y;
+
+		y += 22.5;
+
+		this.mapNationInfluenceDiplomatic.put(NationUS.class, new InfluenceDiplomatic(
+				getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
+
+		this.mapNationInfluenceDiplomatic.put(NationChina.class, new InfluenceDiplomatic(
+				getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
 
 	}
 
-	public final HashMap<ENation, InfluenceEconomic> getMapNationInfluenceEconomic() {
+	public final HashMap<Class<? extends Nation>, InfluenceEconomic> getMapNationInfluenceEconomic() {
 		return this.mapNationInfluenceEconomic;
 	}
 
-	public final HashMap<ENation, InfluenceDiplomatic> getMapNationInfluenceDeplomatic() {
+	public final HashMap<Class<? extends Nation>, InfluenceDiplomatic> getMapNationInfluenceDiplomatic() {
 		return this.mapNationInfluenceDiplomatic;
 	}
 

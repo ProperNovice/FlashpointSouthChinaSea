@@ -1,4 +1,4 @@
-package influence;
+package contestedIslands;
 
 import cubes.Cube;
 import utils.Enums.DirectionEnum;
@@ -6,11 +6,11 @@ import utils.Enums.RelocateTypeEnum;
 import utils.ListImageViewAbles;
 import utils.Vector2;
 
-public abstract class Influence {
+public abstract class ContestedIsland {
 
 	private ListImageViewAbles<Cube> listCubes = new ListImageViewAbles<>();
 
-	public Influence(int size, Vector2 coordinatesFirstCube,
+	public ContestedIsland(int size, Vector2 coordinatesFirstCube,
 			DirectionEnum directionEnumHorizontal) {
 
 		this.listCubes.getArrayList().setCapacity(size);

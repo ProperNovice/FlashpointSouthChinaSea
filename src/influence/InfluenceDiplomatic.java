@@ -5,9 +5,9 @@ import utils.Vector2;
 
 public class InfluenceDiplomatic extends Influence {
 
-	public InfluenceDiplomatic(int size, int prePrintedCubes, Vector2 coordinatesFirstCube,
+	public InfluenceDiplomatic(int size, Vector2 coordinatesFirstCube,
 			DirectionEnum directionEnumHorizontal) {
-		super(size, prePrintedCubes, coordinatesFirstCube, directionEnumHorizontal);
+		super(size, coordinatesFirstCube, directionEnumHorizontal);
 	}
 
 }

@@ -38,7 +38,7 @@ public enum Credentials {
 		// c map
 
 		x = this.gapBetweenBorders;
-		x = 0;
+//		x = 0;
 		this.cMap = new Vector2(x, x);
 
 	}

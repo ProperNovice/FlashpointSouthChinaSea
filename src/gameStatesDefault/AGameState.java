@@ -24,12 +24,12 @@ public abstract class AGameState {
 
 	public final void executeKeyPressed(KeyCode keyCode) {
 
+		handleKeyPressed(keyCode);
+
 		int keyCodeID = KeyCodeHandler.INSTANCE.getKeyCodeInt(keyCode);
 
-		if (keyCodeID == -1) {
-			handleKeyPressed(keyCode);
+		if (keyCodeID == -1)
 			return;
-		}
 
 		EText textEnumPressed = Text.INSTANCE.getTextEnumOptionPressed(keyCodeID);
 
