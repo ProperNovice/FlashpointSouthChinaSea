@@ -18,6 +18,7 @@ import cubes.CubeRed;
 import gameStatesDefault.AGameState;
 import javafx.scene.input.KeyCode;
 import model.Map;
+import model.NationsManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
@@ -56,6 +57,63 @@ public class JUnit extends AGameState {
 		addCubesContestedIsland(ParacelIslands.class, NationUS.class);
 		addCubesContestedIsland(SpratlyIslands.class, NationChina.class);
 		addCubesContestedIsland(SpratlyIslands.class, NationUS.class);
+
+		addCubesAvailable(NationChina.class, 7);
+		addCubesAvailable(NationUS.class, 9);
+
+		addCubesReserve(NationChina.class, 7);
+		addCubesReserve(NationUS.class, 9);
+
+		addCubesPoliticalWarfare(NationChina.class, 2);
+		addCubesPoliticalWarfare(NationUS.class, 3);
+
+	}
+
+	public void addCubesAvailable(Class<? extends Nation> classNation, int cubes) {
+
+		Nation nation = null;
+
+		if (classNation.equals(NationUS.class))
+			nation = NationsManager.INSTANCE.getNationUS();
+		else if (classNation.equals(NationChina.class))
+			nation = NationsManager.INSTANCE.getNationChina();
+
+		for (int counter = 1; counter <= cubes; counter++)
+			nation.getAvailable().getArrayList().addLast(new CubeRed());
+
+		nation.getAvailable().animateAsynchronous();
+
+	}
+
+	public void addCubesReserve(Class<? extends Nation> classNation, int cubes) {
+
+		Nation nation = null;
+
+		if (classNation.equals(NationUS.class))
+			nation = NationsManager.INSTANCE.getNationUS();
+		else if (classNation.equals(NationChina.class))
+			nation = NationsManager.INSTANCE.getNationChina();
+
+		for (int counter = 1; counter <= cubes; counter++)
+			nation.getReserve().getArrayList().addLast(new CubeRed());
+
+		nation.getReserve().animateAsynchronous();
+
+	}
+
+	public void addCubesPoliticalWarfare(Class<? extends Nation> classNation, int cubes) {
+
+		Nation nation = null;
+
+		if (classNation.equals(NationUS.class))
+			nation = NationsManager.INSTANCE.getNationUS();
+		else if (classNation.equals(NationChina.class))
+			nation = NationsManager.INSTANCE.getNationChina();
+
+		for (int counter = 1; counter <= cubes; counter++)
+			nation.getPoliticalWarfare().getArrayList().addLast(new CubeRed());
+
+		nation.getPoliticalWarfare().animateAsynchronous();
 
 	}
 
