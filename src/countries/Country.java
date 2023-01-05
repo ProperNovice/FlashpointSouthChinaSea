@@ -1,8 +1,7 @@
 package countries;
 
-import influence.InfluenceDiplomatic;
-import influence.InfluenceEconomic;
 import managers.Credentials;
+import model.Influence;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
@@ -12,16 +11,11 @@ import utils.Vector2;
 
 public abstract class Country {
 
-	private HashMap<Class<? extends Nation>, InfluenceEconomic> mapNationInfluenceEconomic = null;
-	private HashMap<Class<? extends Nation>, InfluenceDiplomatic> mapNationInfluenceDiplomatic = null;
+	private HashMap<Class<? extends Nation>, Influence> nationInfluenceEconomic = new HashMap<>();
+	private HashMap<Class<? extends Nation>, Influence> nationInfluenceDiplomatic = new HashMap<>();
 
 	public Country() {
-
-		this.mapNationInfluenceEconomic = new HashMap<>();
-		this.mapNationInfluenceDiplomatic = new HashMap<>();
-
 		setUpInfluence();
-
 	}
 
 	private void setUpInfluence() {
@@ -38,11 +32,11 @@ public abstract class Country {
 
 		y -= 22.5;
 
-		this.mapNationInfluenceEconomic.put(NationUS.class, new InfluenceEconomic(
-				getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
+		this.nationInfluenceEconomic.put(NationUS.class,
+				new Influence(getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
 
-		this.mapNationInfluenceEconomic.put(NationChina.class, new InfluenceEconomic(
-				getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
+		this.nationInfluenceEconomic.put(NationChina.class,
+				new Influence(getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
 
 		// influence diplomatic
 
@@ -54,20 +48,20 @@ public abstract class Country {
 
 		y += 22.5;
 
-		this.mapNationInfluenceDiplomatic.put(NationUS.class, new InfluenceDiplomatic(
-				getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
+		this.nationInfluenceDiplomatic.put(NationUS.class,
+				new Influence(getInfluenceSize(), new Vector2(x - 56.5, y), DirectionEnum.LEFT));
 
-		this.mapNationInfluenceDiplomatic.put(NationChina.class, new InfluenceDiplomatic(
-				getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
+		this.nationInfluenceDiplomatic.put(NationChina.class,
+				new Influence(getInfluenceSize(), new Vector2(x + 56.5, y), DirectionEnum.RIGHT));
 
 	}
 
-	public final HashMap<Class<? extends Nation>, InfluenceEconomic> getMapNationInfluenceEconomic() {
-		return this.mapNationInfluenceEconomic;
+	public final HashMap<Class<? extends Nation>, Influence> getNationInfluenceEconomic() {
+		return this.nationInfluenceEconomic;
 	}
 
-	public final HashMap<Class<? extends Nation>, InfluenceDiplomatic> getMapNationInfluenceDiplomatic() {
-		return this.mapNationInfluenceDiplomatic;
+	public final HashMap<Class<? extends Nation>, Influence> getNationInfluenceDiplomatic() {
+		return this.nationInfluenceDiplomatic;
 	}
 
 	protected abstract Vector2 getCenterCoordinates();

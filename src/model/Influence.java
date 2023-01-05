@@ -1,4 +1,4 @@
-package influence;
+package model;
 
 import cubes.Cube;
 import utils.Enums.DirectionEnum;
@@ -6,7 +6,7 @@ import utils.Enums.RelocateTypeEnum;
 import utils.ListImageViewAbles;
 import utils.Vector2;
 
-public abstract class Influence {
+public class Influence {
 
 	private ListImageViewAbles<Cube> listCubes = new ListImageViewAbles<>();
 

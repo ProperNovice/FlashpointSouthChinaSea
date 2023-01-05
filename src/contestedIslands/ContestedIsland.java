@@ -1,28 +1,44 @@
 package contestedIslands;
 
-import cubes.Cube;
+import managers.Credentials;
+import model.Influence;
+import nations.Nation;
+import nations.NationChina;
+import nations.NationUS;
 import utils.Enums.DirectionEnum;
-import utils.Enums.RelocateTypeEnum;
-import utils.ListImageViewAbles;
+import utils.HashMap;
 import utils.Vector2;
 
 public abstract class ContestedIsland {
 
-	private ListImageViewAbles<Cube> listCubes = new ListImageViewAbles<>();
+	private HashMap<Class<? extends Nation>, Influence> nationInfluence = new HashMap<>();
 
-	public ContestedIsland(int size, Vector2 coordinatesFirstCube,
-			DirectionEnum directionEnumHorizontal) {
+	public ContestedIsland() {
+		setUpInfluence();
+	}
 
-		this.listCubes.getArrayList().setCapacity(size);
-		this.listCubes.getListCredentials().coordinatesList = coordinatesFirstCube;
-		this.listCubes.getListCredentials().directionEnumHorizontal = directionEnumHorizontal;
-		this.listCubes.getListCredentials().relocateTypeEnum = RelocateTypeEnum.CENTER;
-		this.listCubes.getListCredentials().gapBetweenComponents.x = 31;
+	private void setUpInfluence() {
+
+		double x = getCenterCoordinates().x;
+		double y = getCenterCoordinates().y;
+
+		x += Credentials.INSTANCE.cMap.x;
+		y += Credentials.INSTANCE.cMap.y;
+
+		this.nationInfluence.put(NationUS.class,
+				new Influence(getInfluenceSize(), new Vector2(x - 34.5, y), DirectionEnum.LEFT));
+
+		this.nationInfluence.put(NationChina.class,
+				new Influence(getInfluenceSize(), new Vector2(x + 34.5, y), DirectionEnum.RIGHT));
 
 	}
 
-	public final ListImageViewAbles<Cube> getListCubes() {
-		return this.listCubes;
+	public final HashMap<Class<? extends Nation>, Influence> getNationInfluence() {
+		return this.nationInfluence;
 	}
+
+	protected abstract Vector2 getCenterCoordinates();
+
+	protected abstract int getInfluenceSize();
 
 }
