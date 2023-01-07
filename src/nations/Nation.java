@@ -1,6 +1,6 @@
 package nations;
 
-import cubes.Cube;
+import components.Cube;
 import managers.Credentials;
 import utils.Enums.RearrangeTypeEnum;
 import utils.Enums.RelocateTypeEnum;

@@ -1,6 +1,7 @@
 package managers;
 
 import model.Map;
+import model.TensionManager;
 
 public enum InstantiateComponents {
 
@@ -9,6 +10,7 @@ public enum InstantiateComponents {
 	private InstantiateComponents() {
 
 		Map.values();
+		TensionManager.values();
 
 	}
 

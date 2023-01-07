@@ -11,6 +11,15 @@ public class Vector2 {
 
 	}
 
+	public Vector2 addAndReturnNew(Vector2 vector2) {
+
+		double x = this.x + vector2.x;
+		double y = this.y + vector2.y;
+
+		return new Vector2(x, y);
+
+	}
+
 	public void print() {
 
 		Logger.INSTANCE.log("x -> " + this.x);

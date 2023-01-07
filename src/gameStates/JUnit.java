@@ -2,6 +2,9 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
+import components.Cube;
+import components.CubeBlue;
+import components.CubeRed;
 import contestedIslands.ContestedIsland;
 import contestedIslands.ParacelIslands;
 import contestedIslands.ScarboroughShoal;
@@ -12,16 +15,16 @@ import countries.Indonesia;
 import countries.Malaysia;
 import countries.Philippines;
 import countries.Vietnam;
-import cubes.Cube;
-import cubes.CubeBlue;
-import cubes.CubeRed;
 import gameStatesDefault.AGameState;
 import javafx.scene.input.KeyCode;
 import model.Map;
 import model.NationsManager;
+import model.TensionManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
+import tensions.Tension;
+import tensions.TensionHigh;
 
 public class JUnit extends AGameState {
 
@@ -65,7 +68,9 @@ public class JUnit extends AGameState {
 		addCubesReserve(NationUS.class, 9);
 
 		addCubesPoliticalWarfare(NationChina.class, 2);
-		addCubesPoliticalWarfare(NationUS.class, 3);
+		addCubesPoliticalWarfare(NationUS.class, 1);
+
+		setTension(TensionHigh.class);
 
 	}
 
@@ -185,6 +190,10 @@ public class JUnit extends AGameState {
 			e.printStackTrace();
 		}
 
+	}
+
+	public void setTension(Class<? extends Tension> classTension) {
+		TensionManager.INSTANCE.setTensionAnimate(classTension);
 	}
 
 }

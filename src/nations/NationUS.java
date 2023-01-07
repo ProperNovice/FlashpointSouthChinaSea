@@ -1,7 +1,7 @@
 package nations;
 
-import cubes.Cube;
-import cubes.CubeBlue;
+import components.Cube;
+import components.CubeBlue;
 import utils.Vector2;
 
 public class NationUS extends Nation {

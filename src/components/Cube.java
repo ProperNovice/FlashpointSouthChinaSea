@@ -1,4 +1,4 @@
-package cubes;
+package components;
 
 import enums.ELayerZ;
 import utils.ImageView;

@@ -1,8 +1,8 @@
 package model;
 
-import cubes.Cube;
 import utils.Enums.DirectionEnum;
 import utils.Enums.RelocateTypeEnum;
+import components.Cube;
 import utils.ListImageViewAbles;
 import utils.Vector2;
 

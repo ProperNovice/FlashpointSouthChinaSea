@@ -1,4 +1,4 @@
-package cubes;
+package components;
 
 public class CubeRed extends Cube {
 
