@@ -6,14 +6,8 @@ import components.Cube;
 import components.CubeBlue;
 import components.CubeRed;
 import contestedIslands.ContestedIsland;
-import contestedIslands.ParacelIslands;
 import contestedIslands.ScarboroughShoal;
-import contestedIslands.SpratlyIslands;
-import countries.Brunei;
 import countries.Country;
-import countries.Indonesia;
-import countries.Malaysia;
-import countries.Philippines;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
 import javafx.scene.input.KeyCode;
@@ -45,21 +39,9 @@ public class JUnit extends AGameState {
 
 		addCubesCountry(Vietnam.class, NationChina.class);
 		addCubesCountry(Vietnam.class, NationUS.class);
-		addCubesCountry(Malaysia.class, NationChina.class);
-		addCubesCountry(Malaysia.class, NationUS.class);
-		addCubesCountry(Philippines.class, NationChina.class);
-		addCubesCountry(Philippines.class, NationUS.class);
-		addCubesCountry(Brunei.class, NationChina.class);
-		addCubesCountry(Brunei.class, NationUS.class);
-		addCubesCountry(Indonesia.class, NationChina.class);
-		addCubesCountry(Indonesia.class, NationUS.class);
 
 		addCubesContestedIsland(ScarboroughShoal.class, NationChina.class);
 		addCubesContestedIsland(ScarboroughShoal.class, NationUS.class);
-		addCubesContestedIsland(ParacelIslands.class, NationChina.class);
-		addCubesContestedIsland(ParacelIslands.class, NationUS.class);
-		addCubesContestedIsland(SpratlyIslands.class, NationChina.class);
-		addCubesContestedIsland(SpratlyIslands.class, NationUS.class);
 
 		addCubesAvailable(NationChina.class, 7);
 		addCubesAvailable(NationUS.class, 9);

@@ -11,12 +11,49 @@ public class Vector2 {
 
 	}
 
-	public Vector2 addAndReturnNew(Vector2 vector2) {
+	public Vector2 addVector2(Vector2 vector2) {
 
 		double x = this.x + vector2.x;
 		double y = this.y + vector2.y;
 
 		return new Vector2(x, y);
+
+	}
+
+	public Vector2 addX(double x) {
+
+		x += this.x;
+		return new Vector2(x, this.y);
+
+	}
+
+	public Vector2 addY(double y) {
+
+		y += this.y;
+		return new Vector2(this.x, y);
+
+	}
+
+	public Vector2 substractVector2(Vector2 vector2) {
+
+		double x = this.x - vector2.x;
+		double y = this.y - vector2.y;
+
+		return new Vector2(x, y);
+
+	}
+
+	public Vector2 substractX(double x) {
+
+		x = this.x - x;
+		return new Vector2(x, this.y);
+
+	}
+
+	public Vector2 substractY(double y) {
+
+		y = this.y - y;
+		return new Vector2(this.x, y);
 
 	}
 
