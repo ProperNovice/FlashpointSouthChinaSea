@@ -55,9 +55,6 @@ public enum VictoryPointTracker {
 
 		this.score = Math.min(this.score, 15);
 
-		System.out.println(this.nationWinning);
-		System.out.println(this.score);
-
 		// relocation disk
 
 		Vector2 vector2 = null;
