@@ -8,7 +8,6 @@ import components.CubeRed;
 import contestedIslands.ContestedIsland;
 import contestedIslands.ScarboroughShoal;
 import countries.Country;
-import countries.Malaysia;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
 import javafx.scene.input.KeyCode;
@@ -23,13 +22,10 @@ import tensions.TensionHigh;
 
 public class JUnit extends AGameState {
 
-	private boolean run = false;
+	private boolean run = true;
 
 	@Override
 	public void execute() {
-
-		Map.INSTANCE.getCountry(Malaysia.class).enableInfluenceEconomicMapPosition();
-		Map.INSTANCE.getCountry(Malaysia.class).enableInfluenceDiplomaticMapPosition();
 
 	}
 
