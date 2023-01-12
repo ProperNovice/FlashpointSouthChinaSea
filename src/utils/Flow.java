@@ -50,6 +50,18 @@ public enum Flow {
 		return this.gameStateCurrent;
 	}
 
+	public void print() {
+
+		Logger.INSTANCE.logNewLine("-> printing flow started");
+
+		for (Class<? extends AGameState> classGameState : this.flow)
+			Logger.INSTANCE.log(classGameState.getSimpleName());
+
+		Logger.INSTANCE.newLine();
+		Logger.INSTANCE.logNewLine("<- printing flow ended");
+
+	}
+
 	private AGameState getGameState(Class<? extends AGameState> gameStateClass) {
 
 		try {

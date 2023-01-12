@@ -16,6 +16,7 @@ public enum Credentials {
 	public RearrangeTypeEnum rearrangeTypeEnumText = RearrangeTypeEnum.LINEAR;
 
 	public Vector2 cMap;
+	public double cardWidth;
 
 	private Credentials() {
 
@@ -38,8 +39,16 @@ public enum Credentials {
 		// c map
 
 		x = this.gapBetweenBorders;
-//		x = 0;
 		this.cMap = new Vector2(x, x);
+
+		// d card
+
+		x = this.dFrame.x;
+		x -= 2 * this.gapBetweenBorders;
+		x -= 1018;
+		x -= 3 * this.dGapBetweenComponents.x;
+		x /= 3;
+		this.cardWidth = x;
 
 	}
 
