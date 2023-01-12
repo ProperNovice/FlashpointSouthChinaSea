@@ -9,20 +9,20 @@ public class AddInfluenceCubes {
 
 	private int cubesLeftToAdd = -1;
 	private Class<? extends Nation> nationClass = null;
-	private boolean canAddMultipleCubesInTheSameCountry = true;
+	private boolean canAddMultipleCubesInTheSameTerritory = true;
 	private ArrayList<Class<? extends Country>> countriesToAddEconomicCube = null;
 	private ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube = null;
 	private ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube = null;
 
 	public AddInfluenceCubes(int cubesLeftToAdd, Class<? extends Nation> nation,
-			boolean canAddMultipleCubesInTheSameCountry,
+			boolean canAddMultipleCubesInTheSameTerritory,
 			ArrayList<Class<? extends Country>> countriesToAddEconomicCube,
 			ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube,
 			ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube) {
 
 		this.cubesLeftToAdd = cubesLeftToAdd;
 		this.nationClass = nation;
-		this.canAddMultipleCubesInTheSameCountry = canAddMultipleCubesInTheSameCountry;
+		this.canAddMultipleCubesInTheSameTerritory = canAddMultipleCubesInTheSameTerritory;
 		this.countriesToAddEconomicCube = countriesToAddEconomicCube;
 		this.countriesToAddDiplomaticCube = countriesToAddDiplomaticCube;
 		this.contestedIslandsToAddCube = contestedIslandsToAddCube;
@@ -30,11 +30,30 @@ public class AddInfluenceCubes {
 	}
 
 	public void cubeAddedEconomic(Class<? extends Country> classCountry) {
+
 		this.cubesLeftToAdd--;
+
+		if (!this.canAddMultipleCubesInTheSameTerritory)
+			this.countriesToAddEconomicCube.remove(classCountry);
+
 	}
 
 	public void cubeAddedDiplomatic(Class<? extends Country> classCountry) {
+
 		this.cubesLeftToAdd--;
+
+		if (!this.canAddMultipleCubesInTheSameTerritory)
+			this.countriesToAddDiplomaticCube.remove(classCountry);
+
+	}
+
+	public void cubeAddedContestedIsland(Class<? extends ContestedIsland> classContestedIsland) {
+
+		this.cubesLeftToAdd--;
+
+		if (!this.canAddMultipleCubesInTheSameTerritory)
+			this.contestedIslandsToAddCube.remove(classContestedIsland);
+
 	}
 
 	public int getCubesLeftToAdd() {
