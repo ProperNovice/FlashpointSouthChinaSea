@@ -93,6 +93,10 @@ public class Interfaces {
 			SelectImageViewManager.INSTANCE.addSelectCoordinates((IMouseEventAble) this);
 		}
 
+		public default void releaseSelected() {
+			SelectImageViewManager.INSTANCE.releaseSelectCoordinates((IMouseEventAble) this);
+		}
+
 	}
 
 	public interface IUpdateAble {
