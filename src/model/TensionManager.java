@@ -20,8 +20,8 @@ public enum TensionManager {
 
 	INSTANCE;
 
-	private ArrayList<Tension> list = new ArrayList<>();
-	private HashMap<Class<? extends Tension>, Vector2> tensionCoordinates = new HashMap<>();
+	private ArrayList<Tension> tensionList = new ArrayList<>();
+	private HashMap<Tension, Vector2> tensionCoordinates = new HashMap<>();
 	private HashMap<Tension, MapPosition> tensionMapPositions = new HashMap<>();
 	private Tension tensionCurrent = null;
 	private Vector2 vector2TensionLow = new Vector2(489, 117);
@@ -35,7 +35,27 @@ public enum TensionManager {
 		createTensionCoordinates(TensionHigh.class);
 		createTensionCoordinates(TensionCritical.class);
 
-		setTensionRelocate(TensionLow.class);
+		setTensionRelocate(this.tensionList.get(0));
+
+	}
+
+	public void increaseTension() {
+
+		int tensionIndex = this.tensionList.indexOf(this.tensionCurrent);
+		tensionIndex++;
+		tensionIndex = Math.min(tensionIndex, this.tensionList.size() - 1);
+
+		setTensionAnimate(this.tensionList.get(tensionIndex));
+
+	}
+
+	public void reduceTension() {
+
+		int tensionIndex = this.tensionList.indexOf(this.tensionCurrent);
+		tensionIndex--;
+		tensionIndex = Math.max(tensionIndex, 0);
+
+		setTensionAnimate(this.tensionList.get(tensionIndex));
 
 	}
 
@@ -61,32 +81,18 @@ public enum TensionManager {
 		return this.tensionCurrent;
 	}
 
-	private void setTensionRelocate(Class<? extends Tension> classTension) {
+	private void setTensionRelocate(Tension tension) {
 
-		setTensionObject(classTension);
-		this.disk.getImageView().relocateCenter(this.tensionCoordinates.getValue(classTension));
+		this.tensionCurrent = tension;
+		this.disk.getImageView().relocateCenter(this.tensionCoordinates.getValue(tension));
 
 	}
 
-	public void setTensionAnimate(Class<? extends Tension> classTension) {
+	public void setTensionAnimate(Tension tension) {
 
-		setTensionObject(classTension);
-		Animation.INSTANCE.animateCenter(this.disk, this.tensionCoordinates.getValue(classTension),
+		this.tensionCurrent = tension;
+		Animation.INSTANCE.animateCenter(this.disk, this.tensionCoordinates.getValue(tension),
 				AnimationSynchEnum.ASYNCHRONOUS);
-
-	}
-
-	private void setTensionObject(Class<? extends Tension> classTension) {
-
-		for (Tension tension : this.list) {
-
-			if (!tension.getClass().equals(classTension))
-				continue;
-
-			this.tensionCurrent = tension;
-			return;
-
-		}
 
 	}
 
@@ -95,9 +101,9 @@ public enum TensionManager {
 		try {
 
 			final Tension tension = classTension.getConstructor().newInstance();
-			this.list.addLast(tension);
+			this.tensionList.addLast(tension);
 
-			int index = this.list.size() - 1;
+			int index = this.tensionList.size() - 1;
 
 			double x, y;
 
@@ -110,7 +116,7 @@ public enum TensionManager {
 
 			Vector2 vector2 = new Vector2(x, y);
 
-			this.tensionCoordinates.put(classTension, vector2);
+			this.tensionCoordinates.put(tension, vector2);
 			this.tensionMapPositions.put(tension,
 					new MapPosition(vector2, () -> handleTensionMapPositionPressed(tension)));
 

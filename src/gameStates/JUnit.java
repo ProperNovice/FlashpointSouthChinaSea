@@ -19,8 +19,6 @@ import model.TensionManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
-import tensions.Tension;
-import tensions.TensionHigh;
 
 public class JUnit extends AGameState {
 
@@ -31,7 +29,7 @@ public class JUnit extends AGameState {
 
 		resolveCardEvent(Card09.class);
 
-		proceedToNextGameState();
+//		proceedToNextGameState();
 
 	}
 
@@ -58,7 +56,7 @@ public class JUnit extends AGameState {
 		addCubesPoliticalWarfare(NationChina.class, 2);
 		addCubesPoliticalWarfare(NationUS.class, 1);
 
-		setTension(TensionHigh.class);
+		increaseTension(1);
 
 	}
 
@@ -180,8 +178,9 @@ public class JUnit extends AGameState {
 
 	}
 
-	public void setTension(Class<? extends Tension> classTension) {
-		TensionManager.INSTANCE.setTensionAnimate(classTension);
+	public void increaseTension(int times) {
+		for (int counter = 1; counter <= times; counter++)
+			TensionManager.INSTANCE.increaseTension();
 	}
 
 	public void resolveCardEvent(Class<? extends CardEvent> cardEventClass) {
