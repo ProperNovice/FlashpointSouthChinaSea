@@ -18,6 +18,7 @@ public class TensionToAnyLevel extends AGameState {
 	@Override
 	public void handleTensionPressed(Tension tension) {
 
+		concealText();
 		TensionManager.INSTANCE.hideTensionMapPositions();
 		TensionManager.INSTANCE.setTensionAnimate(tension.getClass());
 		proceedToNextGameState();

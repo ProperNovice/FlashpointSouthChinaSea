@@ -8,7 +8,7 @@ import model.OperationValue;
 import nations.Nation;
 import utils.Flow;
 
-public class Card01 extends CardEvent {
+public class Card07 extends CardEvent {
 
 	@Override
 	public OperationValue getOperationValue() {
@@ -17,12 +17,12 @@ public class Card01 extends CardEvent {
 
 	@Override
 	public EMode getEMode() {
-		return EMode.TERRITORIAL;
+		return EMode.MILITARY;
 	}
 
 	@Override
 	public EScoring getEScoring() {
-		return EScoring.VIETNAM;
+		return EScoring.CR_FONOP;
 	}
 
 	@Override

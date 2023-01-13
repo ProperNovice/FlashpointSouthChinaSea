@@ -5,6 +5,7 @@ import managers.Credentials;
 import utils.ImageView;
 import utils.Interfaces.IImageViewAble;
 import utils.Interfaces.IMouseEventAble;
+import utils.Logger;
 
 public abstract class Card implements IImageViewAble, IMouseEventAble {
 
@@ -22,7 +23,14 @@ public abstract class Card implements IImageViewAble, IMouseEventAble {
 
 	}
 
-	public void print() {
+	public final void print() {
+
+		Logger.INSTANCE.log("printing " + this.getClass().getSimpleName());
+		printCredentials();
+
+	}
+
+	protected void printCredentials() {
 
 	}
 

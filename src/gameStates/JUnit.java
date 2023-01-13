@@ -2,6 +2,8 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
+import cards.Card09;
+import cards.CardEvent;
 import components.Cube;
 import components.CubeBlue;
 import components.CubeRed;
@@ -19,16 +21,17 @@ import nations.NationChina;
 import nations.NationUS;
 import tensions.Tension;
 import tensions.TensionHigh;
-import utils.Flow;
 
 public class JUnit extends AGameState {
 
-	private boolean run = true;
+	private boolean run = false;
 
 	@Override
 	public void execute() {
 
-		Flow.INSTANCE.executeGameState(TensionToAnyLevel.class);
+		resolveCardEvent(Card09.class);
+
+		proceedToNextGameState();
 
 	}
 
@@ -179,6 +182,23 @@ public class JUnit extends AGameState {
 
 	public void setTension(Class<? extends Tension> classTension) {
 		TensionManager.INSTANCE.setTensionAnimate(classTension);
+	}
+
+	public void resolveCardEvent(Class<? extends CardEvent> cardEventClass) {
+
+		try {
+
+			CardEvent card = cardEventClass.getConstructor().newInstance();
+			card.getImageView().relocateTopLeft(1620, 25);
+			card.print();
+
+			card.resolveEvent();
+
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 }

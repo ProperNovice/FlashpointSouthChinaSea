@@ -8,7 +8,7 @@ public class OperationValue {
 		this.operationValue = operationValue;
 	}
 
-	public int getOperationValue() {
+	public int getValue() {
 		return this.operationValue;
 	}
 
