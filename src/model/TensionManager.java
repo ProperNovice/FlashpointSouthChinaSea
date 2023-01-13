@@ -1,5 +1,7 @@
 package model;
 
+import java.lang.reflect.InvocationTargetException;
+
 import components.Disk;
 import managers.Credentials;
 import tensions.Tension;
@@ -10,7 +12,8 @@ import tensions.TensionMedium;
 import utils.Animation;
 import utils.ArrayList;
 import utils.Enums.AnimationSynchEnum;
-import utils.ShutDown;
+import utils.Flow;
+import utils.HashMap;
 import utils.Vector2;
 
 public enum TensionManager {
@@ -18,6 +21,8 @@ public enum TensionManager {
 	INSTANCE;
 
 	private ArrayList<Tension> list = new ArrayList<>();
+	private HashMap<Class<? extends Tension>, Vector2> tensionCoordinates = new HashMap<>();
+	private HashMap<Tension, MapPosition> tensionMapPositions = new HashMap<>();
 	private Tension tensionCurrent = null;
 	private Vector2 vector2TensionLow = new Vector2(489, 117);
 	private double gapBetweenTensions = 55.3;
@@ -25,35 +30,53 @@ public enum TensionManager {
 
 	private TensionManager() {
 
-		this.list.addLast(new TensionLow());
-		this.list.addLast(new TensionMedium());
-		this.list.addLast(new TensionHigh());
-		this.list.addLast(new TensionCritical());
+		createTensionCoordinates(TensionLow.class);
+		createTensionCoordinates(TensionMedium.class);
+		createTensionCoordinates(TensionHigh.class);
+		createTensionCoordinates(TensionCritical.class);
 
 		setTensionRelocate(TensionLow.class);
 
+	}
+
+	public void showTensionMapPositions() {
+
+		for (Tension tension : this.tensionMapPositions)
+			this.tensionMapPositions.getValue(tension).setSelected();
+
+	}
+
+	public void hideTensionMapPositions() {
+
+		for (Tension tension : this.tensionMapPositions)
+			this.tensionMapPositions.getValue(tension).releaseSelected();
+
+	}
+
+	private void handleTensionMapPositionPressed(Tension tension) {
+		Flow.INSTANCE.getGameStateCurrent().handleTensionPressed(tension);
 	}
 
 	public Tension getCurrentTension() {
 		return this.tensionCurrent;
 	}
 
-	public void setTensionRelocate(Class<? extends Tension> classTension) {
-		setTension(classTension);
+	private void setTensionRelocate(Class<? extends Tension> classTension) {
 
-		this.disk.getImageView().relocateCenter(getCurrentTensionCoordinates());
+		setTensionObject(classTension);
+		this.disk.getImageView().relocateCenter(this.tensionCoordinates.getValue(classTension));
 
 	}
 
 	public void setTensionAnimate(Class<? extends Tension> classTension) {
 
-		setTension(classTension);
-		Animation.INSTANCE.animateCenter(this.disk, getCurrentTensionCoordinates(),
+		setTensionObject(classTension);
+		Animation.INSTANCE.animateCenter(this.disk, this.tensionCoordinates.getValue(classTension),
 				AnimationSynchEnum.ASYNCHRONOUS);
 
 	}
 
-	private void setTension(Class<? extends Tension> classTension) {
+	private void setTensionObject(Class<? extends Tension> classTension) {
 
 		for (Tension tension : this.list) {
 
@@ -67,30 +90,34 @@ public enum TensionManager {
 
 	}
 
-	private Vector2 getCurrentTensionCoordinates() {
+	private void createTensionCoordinates(Class<? extends Tension> classTension) {
 
-		for (Tension tension : this.list) {
+		try {
 
-			if (!tension.equals(tensionCurrent))
-				continue;
+			final Tension tension = classTension.getConstructor().newInstance();
+			this.list.addLast(tension);
 
-			int currentTensionIndex = this.list.indexOf(tension);
+			int index = this.list.size() - 1;
 
 			double x, y;
 
 			x = Credentials.INSTANCE.cMap.x;
 			x += this.vector2TensionLow.x;
-			x += currentTensionIndex * this.gapBetweenTensions;
+			x += index * this.gapBetweenTensions;
 
 			y = Credentials.INSTANCE.cMap.y;
 			y += this.vector2TensionLow.y;
 
-			return new Vector2(x, y);
+			Vector2 vector2 = new Vector2(x, y);
 
+			this.tensionCoordinates.put(classTension, vector2);
+			this.tensionMapPositions.put(tension,
+					new MapPosition(vector2, () -> handleTensionMapPositionPressed(tension)));
+
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
 		}
-
-		ShutDown.INSTANCE.execute();
-		return null;
 
 	}
 

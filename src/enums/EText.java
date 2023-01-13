@@ -12,6 +12,7 @@ public enum EText {
 	VOID("", TextTypeEnum.INDICATOR),
 	YOU_LOST("You lost", TextTypeEnum.INDICATOR),
 	YOU_WON("You won", TextTypeEnum.INDICATOR),
+	SELECT_TENSION_LEVEL("Select tension level", TextTypeEnum.INDICATOR),
 
 	;
 

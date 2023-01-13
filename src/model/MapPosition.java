@@ -1,4 +1,4 @@
-package countries;
+package model;
 
 import utils.Interfaces.IMouseEventAble;
 import utils.Interfaces.ISelectCoordinatesAble;

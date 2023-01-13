@@ -28,7 +28,7 @@ public enum Credentials {
 
 		// c text panel
 
-		this.cTextPanel = new Vector2(x, y);
+		this.cTextPanel = new Vector2(1050, 25);
 
 		// c image view indicator
 

@@ -70,7 +70,7 @@ public enum VictoryPointTracker {
 
 	private void createTracker() {
 
-		this.zero = new Vector2(510, 1264).addVector2(Credentials.INSTANCE.cMap);
+		this.zero = new Vector2(510, 1265).addVector2(Credentials.INSTANCE.cMap);
 		this.coordinates.getValue(NationUS.class).put(1, this.zero.addX(this.gap));
 		this.coordinates.getValue(NationChina.class).put(1, this.zero.substractX(this.gap));
 

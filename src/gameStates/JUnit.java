@@ -19,6 +19,7 @@ import nations.NationChina;
 import nations.NationUS;
 import tensions.Tension;
 import tensions.TensionHigh;
+import utils.Flow;
 
 public class JUnit extends AGameState {
 
@@ -26,6 +27,8 @@ public class JUnit extends AGameState {
 
 	@Override
 	public void execute() {
+
+		Flow.INSTANCE.executeGameState(TensionToAnyLevel.class);
 
 	}
 

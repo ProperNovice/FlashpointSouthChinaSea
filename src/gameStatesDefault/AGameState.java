@@ -2,6 +2,7 @@ package gameStatesDefault;
 
 import enums.EText;
 import javafx.scene.input.KeyCode;
+import tensions.Tension;
 import utils.ArrayList;
 import utils.Flow;
 import utils.KeyCodeHandler;
@@ -59,6 +60,10 @@ public abstract class AGameState {
 
 	protected final ArrayList<Class<? extends AGameState>> getFlow() {
 		return Flow.INSTANCE.getFlow();
+	}
+
+	public void handleTensionPressed(Tension tension) {
+
 	}
 
 }

@@ -2,6 +2,7 @@ package countries;
 
 import managers.Credentials;
 import model.Influence;
+import model.MapPosition;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
@@ -19,20 +20,12 @@ public abstract class Country {
 		setUpInfluence();
 	}
 
-	public void enableInfluenceEconomicMapPosition() {
-		this.mapPositionInfluenceEconomic.setSelected();
+	public MapPosition getMapPositionInfluenceEconomic() {
+		return this.mapPositionInfluenceEconomic;
 	}
 
-	public void enableInfluenceDiplomaticMapPosition() {
-		this.mapPositionInfluenceDiplomatic.setSelected();
-	}
-
-	public void disableInfluenceEconomicMapPosition() {
-		this.mapPositionInfluenceEconomic.releaseSelected();
-	}
-
-	public void disableInfluenceDiplomaticMapPosition() {
-		this.mapPositionInfluenceDiplomatic.releaseSelected();
+	public MapPosition getMapPositionInfluenceDiplomatic() {
+		return this.mapPositionInfluenceDiplomatic;
 	}
 
 	private void setUpInfluence() {
