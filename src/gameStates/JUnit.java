@@ -8,7 +8,9 @@ import components.Cube;
 import components.CubeBlue;
 import components.CubeRed;
 import contestedIslands.ContestedIsland;
+import contestedIslands.ParacelIslands;
 import contestedIslands.ScarboroughShoal;
+import contestedIslands.SpratlyIslands;
 import countries.Country;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
@@ -28,6 +30,10 @@ public class JUnit extends AGameState {
 	public void execute() {
 
 		resolveCardEvent(Card09.class);
+
+		Map.INSTANCE.getContestedIsland(ParacelIslands.class).getMapPosition().setSelected();
+		Map.INSTANCE.getContestedIsland(ScarboroughShoal.class).getMapPosition().setSelected();
+		Map.INSTANCE.getContestedIsland(SpratlyIslands.class).getMapPosition().setSelected();
 
 //		proceedToNextGameState();
 

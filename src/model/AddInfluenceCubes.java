@@ -7,14 +7,14 @@ import utils.ArrayList;
 
 public class AddInfluenceCubes {
 
-	private int cubesLeftToAdd = -1;
 	private Class<? extends Nation> nationClass = null;
+	private int cubesLeftToAdd = -1;
 	private boolean canAddMultipleCubesInTheSameTerritory = true;
 	private ArrayList<Class<? extends Country>> countriesToAddEconomicCube = null;
 	private ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube = null;
 	private ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube = null;
 
-	public AddInfluenceCubes(int cubesLeftToAdd, Class<? extends Nation> nation,
+	public AddInfluenceCubes(Class<? extends Nation> nation, int cubesLeftToAdd,
 			boolean canAddMultipleCubesInTheSameTerritory,
 			ArrayList<Class<? extends Country>> countriesToAddEconomicCube,
 			ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube,

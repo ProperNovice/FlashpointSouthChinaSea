@@ -7,7 +7,6 @@ public enum AddInfluenceCubesManager {
 	INSTANCE;
 
 	private ArrayList<AddInfluenceCubes> list = new ArrayList<>();
-	private AddInfluenceCubes addInfluenceCubesResolving = null;
 
 	private AddInfluenceCubesManager() {
 
@@ -17,12 +16,8 @@ public enum AddInfluenceCubesManager {
 		this.list.addLast(addInfluenceCubes);
 	}
 
-	public void setAddInfluenceCubesResolving() {
-		this.addInfluenceCubesResolving = this.list.removeFirst();
-	}
-
-	public AddInfluenceCubes getAddInfluenceCubesResolving() {
-		return this.addInfluenceCubesResolving;
+	public ArrayList<AddInfluenceCubes> getList() {
+		return this.list;
 	}
 
 }

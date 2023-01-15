@@ -20,7 +20,7 @@ public class TensionToAnyLevel extends AGameState {
 
 		concealText();
 		TensionManager.INSTANCE.hideTensionMapPositions();
-		TensionManager.INSTANCE.setTensionAnimate(tension.getClass());
+		TensionManager.INSTANCE.setTensionAnimate(tension);
 		proceedToNextGameState();
 
 	}
