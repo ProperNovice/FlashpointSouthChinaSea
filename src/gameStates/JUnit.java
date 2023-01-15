@@ -12,7 +12,6 @@ import contestedIslands.ScarboroughShoal;
 import countries.Country;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
-import javafx.scene.input.KeyCode;
 import model.Map;
 import model.NationsManager;
 import model.TensionManager;
@@ -21,8 +20,6 @@ import nations.NationChina;
 import nations.NationUS;
 
 public class JUnit extends AGameState {
-
-	private boolean run = false;
 
 	@Override
 	public void execute() {
@@ -47,16 +44,6 @@ public class JUnit extends AGameState {
 		resolveCardEvent(Card09.class);
 
 //		proceedToNextGameState();
-
-	}
-
-	@Override
-	protected void handleKeyPressed(KeyCode keyCode) {
-
-		if (this.run)
-			return;
-
-		this.run = true;
 
 	}
 
