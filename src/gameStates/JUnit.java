@@ -8,9 +8,7 @@ import components.Cube;
 import components.CubeBlue;
 import components.CubeRed;
 import contestedIslands.ContestedIsland;
-import contestedIslands.ParacelIslands;
 import contestedIslands.ScarboroughShoal;
-import contestedIslands.SpratlyIslands;
 import countries.Country;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
@@ -29,24 +27,6 @@ public class JUnit extends AGameState {
 	@Override
 	public void execute() {
 
-		resolveCardEvent(Card09.class);
-
-		Map.INSTANCE.getContestedIsland(ParacelIslands.class).getMapPosition().setSelected();
-		Map.INSTANCE.getContestedIsland(ScarboroughShoal.class).getMapPosition().setSelected();
-		Map.INSTANCE.getContestedIsland(SpratlyIslands.class).getMapPosition().setSelected();
-
-//		proceedToNextGameState();
-
-	}
-
-	@Override
-	protected void handleKeyPressed(KeyCode keyCode) {
-
-		if (this.run)
-			return;
-
-		this.run = true;
-
 		addCubesCountry(Vietnam.class, NationChina.class);
 		addCubesCountry(Vietnam.class, NationUS.class);
 
@@ -64,6 +44,20 @@ public class JUnit extends AGameState {
 
 		increaseTension(1);
 
+		resolveCardEvent(Card09.class);
+
+//		proceedToNextGameState();
+
+	}
+
+	@Override
+	protected void handleKeyPressed(KeyCode keyCode) {
+
+		if (this.run)
+			return;
+
+		this.run = true;
+
 	}
 
 	public void addCubesAvailable(Class<? extends Nation> classNation, int cubes) {
@@ -75,10 +69,20 @@ public class JUnit extends AGameState {
 		else if (classNation.equals(NationChina.class))
 			nation = NationsManager.INSTANCE.getNationChina();
 
-		for (int counter = 1; counter <= cubes; counter++)
-			nation.getAvailable().getArrayList().addLast(new CubeRed());
+		for (int counter = 1; counter <= cubes; counter++) {
 
-		nation.getAvailable().animateAsynchronous();
+			Cube cube = null;
+
+			if (classNation.equals(NationChina.class))
+				cube = new CubeRed();
+			else if (classNation.equals(NationUS.class))
+				cube = new CubeBlue();
+
+			nation.getAvailable().getArrayList().addLast(cube);
+
+		}
+
+		nation.getAvailable().relocateImageViews();
 
 	}
 
@@ -91,10 +95,20 @@ public class JUnit extends AGameState {
 		else if (classNation.equals(NationChina.class))
 			nation = NationsManager.INSTANCE.getNationChina();
 
-		for (int counter = 1; counter <= cubes; counter++)
-			nation.getReserve().getArrayList().addLast(new CubeRed());
+		for (int counter = 1; counter <= cubes; counter++) {
 
-		nation.getReserve().animateAsynchronous();
+			Cube cube = null;
+
+			if (classNation.equals(NationChina.class))
+				cube = new CubeRed();
+			else if (classNation.equals(NationUS.class))
+				cube = new CubeBlue();
+
+			nation.getReserve().getArrayList().addLast(cube);
+
+		}
+
+		nation.getReserve().relocateImageViews();
 
 	}
 
@@ -107,10 +121,20 @@ public class JUnit extends AGameState {
 		else if (classNation.equals(NationChina.class))
 			nation = NationsManager.INSTANCE.getNationChina();
 
-		for (int counter = 1; counter <= cubes; counter++)
-			nation.getPoliticalWarfare().getArrayList().addLast(new CubeRed());
+		for (int counter = 1; counter <= cubes; counter++) {
 
-		nation.getPoliticalWarfare().animateAsynchronous();
+			Cube cube = null;
+
+			if (classNation.equals(NationChina.class))
+				cube = new CubeRed();
+			else if (classNation.equals(NationUS.class))
+				cube = new CubeBlue();
+
+			nation.getPoliticalWarfare().getArrayList().addLast(cube);
+
+		}
+
+		nation.getPoliticalWarfare().relocateImageViews();
 
 	}
 
@@ -136,7 +160,7 @@ public class JUnit extends AGameState {
 						.addLast(classCube.getConstructor().newInstance());
 
 			Map.INSTANCE.getContestedIsland(classContestedIsland).getNationInfluence()
-					.getValue(classNation).getListCubes().animateAsynchronous();
+					.getValue(classNation).getListCubes().relocateImageViews();
 
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
@@ -172,10 +196,10 @@ public class JUnit extends AGameState {
 						.addLast(classCube.getConstructor().newInstance());
 
 			Map.INSTANCE.getCountry(classCountry).getNationInfluenceEconomic().getValue(classNation)
-					.getListCubes().animateAsynchronous();
+					.getListCubes().relocateImageViews();
 
 			Map.INSTANCE.getCountry(classCountry).getNationInfluenceDiplomatic()
-					.getValue(classNation).getListCubes().animateAsynchronous();
+					.getValue(classNation).getListCubes().relocateImageViews();
 
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException
 				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
