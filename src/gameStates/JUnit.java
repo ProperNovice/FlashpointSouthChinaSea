@@ -2,33 +2,36 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
-import cards.Card09;
 import cards.CardEvent;
 import components.Cube;
 import components.CubeBlue;
 import components.CubeRed;
 import contestedIslands.ContestedIsland;
 import contestedIslands.ScarboroughShoal;
+import contestedIslands.SpratlyIslands;
 import countries.Country;
+import countries.Malaysia;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
+import model.AddInfluenceCubeBuilder;
 import model.Map;
 import model.NationsManager;
 import model.TensionManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
+import utils.Flow;
 
 public class JUnit extends AGameState {
 
 	@Override
 	public void execute() {
 
-		addCubesCountry(Vietnam.class, NationChina.class);
-		addCubesCountry(Vietnam.class, NationUS.class);
+		addCubesCountry(Vietnam.class, NationChina.class, 3);
+		addCubesCountry(Malaysia.class, NationUS.class, 1);
 
-		addCubesContestedIsland(ScarboroughShoal.class, NationChina.class);
-		addCubesContestedIsland(ScarboroughShoal.class, NationUS.class);
+		addCubesContestedIsland(ScarboroughShoal.class, NationChina.class, 1);
+		addCubesContestedIsland(SpratlyIslands.class, NationUS.class, 1);
 
 		addCubesAvailable(NationChina.class, 7);
 		addCubesAvailable(NationUS.class, 9);
@@ -41,9 +44,14 @@ public class JUnit extends AGameState {
 
 		increaseTension(1);
 
-		resolveCardEvent(Card09.class);
+		new AddInfluenceCubeBuilder().setNationClass(NationUS.class).setCubesToAdd(3)
+				.addAllCountriesForDiplomaticCubes().addAllContestedIslands().buildAndAdd();
 
-//		proceedToNextGameState();
+		Flow.INSTANCE.getFlow().addLast(AddCube.class);
+
+//		resolveCardEvent(Card09.class);
+
+		proceedToNextGameState();
 
 	}
 
@@ -126,11 +134,7 @@ public class JUnit extends AGameState {
 	}
 
 	public void addCubesContestedIsland(Class<? extends ContestedIsland> classContestedIsland,
-			Class<? extends Nation> classNation) {
-
-		ContestedIsland country = Map.INSTANCE.getContestedIsland(classContestedIsland);
-		int size = country.getNationInfluence().getValue(classNation).getListCubes().getArrayList()
-				.getCapacity();
+			Class<? extends Nation> classNation, int cubes) {
 
 		Class<? extends Cube> classCube = null;
 
@@ -141,7 +145,7 @@ public class JUnit extends AGameState {
 
 		try {
 
-			for (int counter = 1; counter <= size; counter++)
+			for (int counter = 1; counter <= cubes; counter++)
 				Map.INSTANCE.getContestedIsland(classContestedIsland).getNationInfluence()
 						.getValue(classNation).getListCubes().getArrayList()
 						.addLast(classCube.getConstructor().newInstance());
@@ -157,11 +161,7 @@ public class JUnit extends AGameState {
 	}
 
 	public void addCubesCountry(Class<? extends Country> classCountry,
-			Class<? extends Nation> classNation) {
-
-		Country country = Map.INSTANCE.getCountry(classCountry);
-		int size = country.getNationInfluenceEconomic().getValue(classNation).getListCubes()
-				.getArrayList().getCapacity();
+			Class<? extends Nation> classNation, int cubes) {
 
 		Class<? extends Cube> classCube = null;
 
@@ -172,12 +172,12 @@ public class JUnit extends AGameState {
 
 		try {
 
-			for (int counter = 1; counter <= size; counter++)
+			for (int counter = 1; counter <= cubes; counter++)
 				Map.INSTANCE.getCountry(classCountry).getNationInfluenceEconomic()
 						.getValue(classNation).getListCubes().getArrayList()
 						.addLast(classCube.getConstructor().newInstance());
 
-			for (int counter = 1; counter <= size; counter++)
+			for (int counter = 1; counter <= cubes; counter++)
 				Map.INSTANCE.getCountry(classCountry).getNationInfluenceDiplomatic()
 						.getValue(classNation).getListCubes().getArrayList()
 						.addLast(classCube.getConstructor().newInstance());

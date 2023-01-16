@@ -38,7 +38,6 @@ public class AddInfluenceCubeBuilder {
 		// add all contested islands
 
 		this.allContestedIslands.addLast(ParacelIslands.class);
-		this.allContestedIslands.addLast(ParacelIslands.class);
 		this.allContestedIslands.addLast(ScarboroughShoal.class);
 		this.allContestedIslands.addLast(SpratlyIslands.class);
 
