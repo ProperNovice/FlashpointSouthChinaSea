@@ -7,6 +7,7 @@ import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
 import utils.Enums.DirectionEnum;
+import utils.Flow;
 import utils.HashMap;
 import utils.Vector2;
 
@@ -42,7 +43,7 @@ public abstract class ContestedIsland {
 	}
 
 	private void handleMapPositionPressed() {
-
+		Flow.INSTANCE.getGameStateCurrent().handleContestedIslandPressed(this);
 	}
 
 	public final MapPosition getMapPosition() {

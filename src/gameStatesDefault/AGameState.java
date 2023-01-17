@@ -1,5 +1,7 @@
 package gameStatesDefault;
 
+import contestedIslands.ContestedIsland;
+import countries.Country;
 import enums.EText;
 import javafx.scene.input.KeyCode;
 import tensions.Tension;
@@ -63,6 +65,18 @@ public abstract class AGameState {
 	}
 
 	public void handleTensionPressed(Tension tension) {
+
+	}
+
+	public void handleCountryInfluenceEconomicPressed(Country country) {
+
+	}
+
+	public void handleCountryInfluenceDiplomaticPressed(Country country) {
+
+	}
+
+	public void handleContestedIslandPressed(ContestedIsland contestedIsland) {
 
 	}
 

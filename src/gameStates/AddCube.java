@@ -1,5 +1,6 @@
 package gameStates;
 
+import components.Cube;
 import contestedIslands.ContestedIsland;
 import countries.Country;
 import gameStatesDefault.AGameState;
@@ -7,9 +8,12 @@ import model.AddInfluenceCubes;
 import model.AddInfluenceCubesManager;
 import model.Influence;
 import model.Map;
+import model.NationsManager;
 import nations.Nation;
 import utils.ArrayList;
+import utils.Flow;
 import utils.Logger;
+import utils.SelectImageViewManager;
 
 public class AddCube extends AGameState {
 
@@ -26,6 +30,82 @@ public class AddCube extends AGameState {
 
 	}
 
+	@Override
+	public void handleCountryInfluenceEconomicPressed(Country country) {
+
+		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
+		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+				.cubeAddedEconomic(country.getClass());
+
+		Cube cube = getNationCube();
+
+		country.getNationInfluenceEconomic()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().getArrayList().addLast(cube);
+
+		country.getNationInfluenceEconomic()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().animateSynchronousLock();
+
+		Flow.INSTANCE.executeGameState(AddCube.class);
+
+	}
+
+	@Override
+	public void handleCountryInfluenceDiplomaticPressed(Country country) {
+
+		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
+		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+				.cubeAddedDiplomatic(country.getClass());
+
+		Cube cube = getNationCube();
+
+		country.getNationInfluenceDiplomatic()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().getArrayList().addLast(cube);
+
+		country.getNationInfluenceDiplomatic()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().animateSynchronousLock();
+
+		Flow.INSTANCE.executeGameState(AddCube.class);
+
+	}
+
+	@Override
+	public void handleContestedIslandPressed(ContestedIsland contestedIsland) {
+
+		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
+		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+				.cubeAddedContestedIsland(contestedIsland.getClass());
+
+		Cube cube = getNationCube();
+
+		contestedIsland.getNationInfluence()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().getArrayList().addLast(cube);
+
+		contestedIsland.getNationInfluence()
+				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getListCubes().animateSynchronousLock();
+
+		Flow.INSTANCE.executeGameState(AddCube.class);
+
+	}
+
+	private Cube getNationCube() {
+
+		Class<? extends Nation> classNation = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+				.getNationClass();
+		Nation nation = NationsManager.INSTANCE.getNation(classNation);
+
+		Cube cube = nation.getAvailable().getArrayList().removeFirst();
+		nation.getAvailable().animateAsynchronous();
+
+		return cube;
+
+	}
+
 	private void handleOptions() {
 
 		int cubesLeftToPlace = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
@@ -35,13 +115,37 @@ public class AddCube extends AGameState {
 				+ this.countryEligibleForDiplomaticInfluence.size()
 				+ this.contestedIslandEligible.size();
 
-		if (cubesLeftToPlace == 0 || differentOptions == 0) {
+		if (cubesLeftToPlace == 0) {
 
 			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
+			proceedToNextGameState();
+
+		} else if (differentOptions == 0) {
+
+			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
+			proceedToNextGameState();
 
 		} else if (differentOptions == 1) {
 
+			for (Country country : this.countryEligibleForEconomicInfluence)
+				handleCountryInfluenceEconomicPressed(country);
+
+			for (Country country : this.countryEligibleForDiplomaticInfluence)
+				handleCountryInfluenceDiplomaticPressed(country);
+
+			for (ContestedIsland contestedIsland : this.contestedIslandEligible)
+				handleContestedIslandPressed(contestedIsland);
+
 		} else {
+
+			for (Country country : this.countryEligibleForEconomicInfluence)
+				country.getMapPositionInfluenceEconomic().setSelected();
+
+			for (Country country : this.countryEligibleForDiplomaticInfluence)
+				country.getMapPositionInfluenceDiplomatic().setSelected();
+
+			for (ContestedIsland contestedIsland : this.contestedIslandEligible)
+				contestedIsland.getMapPosition().setSelected();
 
 		}
 

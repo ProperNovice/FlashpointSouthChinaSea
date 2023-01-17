@@ -7,6 +7,7 @@ import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
 import utils.Enums.DirectionEnum;
+import utils.Flow;
 import utils.HashMap;
 import utils.Vector2;
 
@@ -81,11 +82,11 @@ public abstract class Country {
 	}
 
 	private void handleNationInfluenceEconomicPressed() {
-
+		Flow.INSTANCE.getGameStateCurrent().handleCountryInfluenceEconomicPressed(this);
 	}
 
 	private void handleNationInfluenceDiplomaticPressed() {
-
+		Flow.INSTANCE.getGameStateCurrent().handleCountryInfluenceDiplomaticPressed(this);
 	}
 
 	protected abstract Vector2 getCenterCoordinates();

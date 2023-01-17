@@ -44,8 +44,9 @@ public class JUnit extends AGameState {
 
 		increaseTension(1);
 
-		new AddInfluenceCubeBuilder().setNationClass(NationUS.class).setCubesToAdd(3)
-				.addAllCountriesForDiplomaticCubes().addAllContestedIslands().buildAndAdd();
+		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
+				.addAllCountriesForDiplomaticCubes().canAddMultipleCubesInTheSameTerritory(false)
+				.buildAndAdd();
 
 		Flow.INSTANCE.getFlow().addLast(AddCube.class);
 
@@ -57,12 +58,7 @@ public class JUnit extends AGameState {
 
 	public void addCubesAvailable(Class<? extends Nation> classNation, int cubes) {
 
-		Nation nation = null;
-
-		if (classNation.equals(NationUS.class))
-			nation = NationsManager.INSTANCE.getNationUS();
-		else if (classNation.equals(NationChina.class))
-			nation = NationsManager.INSTANCE.getNationChina();
+		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
 		for (int counter = 1; counter <= cubes; counter++) {
 
@@ -83,12 +79,7 @@ public class JUnit extends AGameState {
 
 	public void addCubesReserve(Class<? extends Nation> classNation, int cubes) {
 
-		Nation nation = null;
-
-		if (classNation.equals(NationUS.class))
-			nation = NationsManager.INSTANCE.getNationUS();
-		else if (classNation.equals(NationChina.class))
-			nation = NationsManager.INSTANCE.getNationChina();
+		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
 		for (int counter = 1; counter <= cubes; counter++) {
 
@@ -109,12 +100,7 @@ public class JUnit extends AGameState {
 
 	public void addCubesPoliticalWarfare(Class<? extends Nation> classNation, int cubes) {
 
-		Nation nation = null;
-
-		if (classNation.equals(NationUS.class))
-			nation = NationsManager.INSTANCE.getNationUS();
-		else if (classNation.equals(NationChina.class))
-			nation = NationsManager.INSTANCE.getNationChina();
+		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
 		for (int counter = 1; counter <= cubes; counter++) {
 

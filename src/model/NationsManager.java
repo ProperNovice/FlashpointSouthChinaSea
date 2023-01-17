@@ -1,7 +1,9 @@
 package model;
 
+import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
+import utils.ShutDown;
 
 public enum NationsManager {
 
@@ -17,12 +19,17 @@ public enum NationsManager {
 
 	}
 
-	public NationUS getNationUS() {
-		return this.nationUS;
-	}
+	public Nation getNation(Class<? extends Nation> classNation) {
 
-	public NationChina getNationChina() {
-		return this.nationChina;
+		if (this.nationChina.getClass().equals(classNation))
+			return this.nationChina;
+
+		else if (this.nationUS.getClass().equals(classNation))
+			return this.nationUS;
+
+		ShutDown.INSTANCE.execute();
+		return null;
+
 	}
 
 }
