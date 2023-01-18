@@ -10,12 +10,13 @@ public class AddInfluenceCubes {
 	private Class<? extends Nation> nationClass = null;
 	private int cubesLeftToAdd = -1;
 	private boolean canAddMultipleCubesInTheSameTerritory = true;
+	private boolean canAddPoliticalWarfare = false;
 	private ArrayList<Class<? extends Country>> countriesToAddEconomicCube = null;
 	private ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube = null;
 	private ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube = null;
 
 	public AddInfluenceCubes(Class<? extends Nation> nation, int cubesLeftToAdd,
-			boolean canAddMultipleCubesInTheSameTerritory,
+			boolean canAddMultipleCubesInTheSameTerritory, boolean canAddPoliticalWarfare,
 			ArrayList<Class<? extends Country>> countriesToAddEconomicCube,
 			ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube,
 			ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube) {
@@ -23,6 +24,7 @@ public class AddInfluenceCubes {
 		this.cubesLeftToAdd = cubesLeftToAdd;
 		this.nationClass = nation;
 		this.canAddMultipleCubesInTheSameTerritory = canAddMultipleCubesInTheSameTerritory;
+		this.canAddPoliticalWarfare = canAddPoliticalWarfare;
 		this.countriesToAddEconomicCube = countriesToAddEconomicCube;
 		this.countriesToAddDiplomaticCube = countriesToAddDiplomaticCube;
 		this.contestedIslandsToAddCube = contestedIslandsToAddCube;
@@ -54,6 +56,14 @@ public class AddInfluenceCubes {
 		if (!this.canAddMultipleCubesInTheSameTerritory)
 			this.contestedIslandsToAddCube.remove(classContestedIsland);
 
+	}
+
+	public void cubeAddedPoliticalWarfare() {
+		this.cubesLeftToAdd--;
+	}
+
+	public boolean canAddPoliticalWarfare() {
+		return this.canAddPoliticalWarfare;
 	}
 
 	public int getCubesLeftToAdd() {

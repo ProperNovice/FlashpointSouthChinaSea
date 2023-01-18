@@ -39,7 +39,7 @@ public class JUnit extends AGameState {
 		addCubesReserve(NationChina.class, 7);
 		addCubesReserve(NationUS.class, 9);
 
-		addCubesPoliticalWarfare(NationChina.class, 2);
+		addCubesPoliticalWarfare(NationChina.class, 1);
 		addCubesPoliticalWarfare(NationUS.class, 1);
 
 		increaseTension(1);
@@ -47,6 +47,9 @@ public class JUnit extends AGameState {
 		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
 				.addAllCountriesForDiplomaticCubes().canAddMultipleCubesInTheSameTerritory(false)
 				.buildAndAdd();
+
+//		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
+//				.canAddPoliticalWarfare(true).buildAndAdd();
 
 		Flow.INSTANCE.getFlow().addLast(AddCube.class);
 

@@ -19,6 +19,7 @@ public class AddInfluenceCubeBuilder {
 	private Class<? extends Nation> nationClass = null;
 	private int cubesToAdd = -1;
 	private boolean canAddMultipleCubesInTheSameTerritory = true;
+	private boolean canAddPoliticalWarfare = false;
 	private ArrayList<Class<? extends Country>> countriesToAddEconomicCube = new ArrayList<>();
 	private ArrayList<Class<? extends Country>> countriesToAddDiplomaticCube = new ArrayList<>();
 	private ArrayList<Class<? extends ContestedIsland>> contestedIslandsToAddCube = new ArrayList<>();
@@ -56,6 +57,11 @@ public class AddInfluenceCubeBuilder {
 	public AddInfluenceCubeBuilder canAddMultipleCubesInTheSameTerritory(
 			boolean canAddMultipleCubesInTheSameTerritory) {
 		this.canAddMultipleCubesInTheSameTerritory = canAddMultipleCubesInTheSameTerritory;
+		return this;
+	}
+
+	public AddInfluenceCubeBuilder canAddPoliticalWarfare(boolean canAddPoliticalWarfare) {
+		this.canAddPoliticalWarfare = canAddPoliticalWarfare;
 		return this;
 	}
 
@@ -114,8 +120,8 @@ public class AddInfluenceCubeBuilder {
 
 		AddInfluenceCubes addInfluenceCubes = new AddInfluenceCubes(this.nationClass,
 				this.cubesToAdd, this.canAddMultipleCubesInTheSameTerritory,
-				this.countriesToAddEconomicCube, this.countriesToAddDiplomaticCube,
-				contestedIslandsToAddCube);
+				this.canAddPoliticalWarfare, this.countriesToAddEconomicCube,
+				this.countriesToAddDiplomaticCube, contestedIslandsToAddCube);
 
 		AddInfluenceCubesManager.INSTANCE.addInfluenceCubeAction(addInfluenceCubes);
 

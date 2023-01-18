@@ -17,6 +17,7 @@ import utils.SelectImageViewManager;
 
 public class AddCube extends AGameState {
 
+	private boolean canAddPoliticalWarfare;
 	private ArrayList<Country> countryEligibleForEconomicInfluence = new ArrayList<>();
 	private ArrayList<Country> countryEligibleForDiplomaticInfluence = new ArrayList<>();
 	private ArrayList<ContestedIsland> contestedIslandEligible = new ArrayList<>();
@@ -93,6 +94,22 @@ public class AddCube extends AGameState {
 
 	}
 
+	private void handlePoliticalWarfarePressed() {
+
+		AddInfluenceCubesManager.INSTANCE.getList().getFirst().cubeAddedPoliticalWarfare();
+
+		Class<? extends Nation> classNation = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+				.getNationClass();
+		Nation nation = NationsManager.INSTANCE.getNation(classNation);
+
+		Cube cube = getNationCube();
+		nation.getPoliticalWarfare().getArrayList().addLast(cube);
+		nation.getPoliticalWarfare().animateSynchronousLock();
+
+		Flow.INSTANCE.executeGameState(AddCube.class);
+
+	}
+
 	private Cube getNationCube() {
 
 		Class<? extends Nation> classNation = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
@@ -115,6 +132,9 @@ public class AddCube extends AGameState {
 				+ this.countryEligibleForDiplomaticInfluence.size()
 				+ this.contestedIslandEligible.size();
 
+		if (this.canAddPoliticalWarfare)
+			differentOptions++;
+
 		if (cubesLeftToPlace == 0) {
 
 			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
@@ -135,6 +155,9 @@ public class AddCube extends AGameState {
 
 			for (ContestedIsland contestedIsland : this.contestedIslandEligible)
 				handleContestedIslandPressed(contestedIsland);
+
+			if (this.canAddPoliticalWarfare)
+				handlePoliticalWarfarePressed();
 
 		} else {
 
@@ -196,6 +219,11 @@ public class AddCube extends AGameState {
 
 		}
 
+		// political warfare
+
+		if (this.canAddPoliticalWarfare)
+			Logger.INSTANCE.logNewLine("can add political warfare");
+
 		Logger.INSTANCE.logNewLine("*");
 
 	}
@@ -250,6 +278,14 @@ public class AddCube extends AGameState {
 			this.contestedIslandEligible.addLast(contestedIsland);
 
 		}
+
+		// political warfare
+
+		if (addInfluenceCubes.canAddPoliticalWarfare() && !NationsManager.INSTANCE
+				.getNation(classNation).getPoliticalWarfare().getArrayList().isMaxCapacity())
+			this.canAddPoliticalWarfare = true;
+		else
+			this.canAddPoliticalWarfare = false;
 
 	}
 
