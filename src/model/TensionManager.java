@@ -49,7 +49,7 @@ public enum TensionManager {
 
 	}
 
-	public void reduceTension() {
+	public void decreaseTension() {
 
 		int tensionIndex = this.tensionList.indexOf(this.tensionCurrent);
 		tensionIndex--;

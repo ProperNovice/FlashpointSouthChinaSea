@@ -116,7 +116,7 @@ public class AddCube extends AGameState {
 				.getNationClass();
 		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
-		Cube cube = nation.getAvailable().getArrayList().removeFirst();
+		Cube cube = nation.getAvailable().getArrayList().removeLast();
 		nation.getAvailable().animateAsynchronous();
 
 		return cube;

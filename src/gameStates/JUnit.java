@@ -2,6 +2,7 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
+import cards.Card12;
 import cards.CardEvent;
 import components.Cube;
 import components.CubeBlue;
@@ -13,21 +14,20 @@ import countries.Country;
 import countries.Malaysia;
 import countries.Vietnam;
 import gameStatesDefault.AGameState;
-import model.AddInfluenceCubeBuilder;
+import javafx.scene.input.KeyCode;
 import model.Map;
 import model.NationsManager;
 import model.TensionManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
-import utils.Flow;
 
 public class JUnit extends AGameState {
 
 	@Override
 	public void execute() {
 
-		addCubesCountry(Vietnam.class, NationChina.class, 3);
+		addCubesCountry(Vietnam.class, NationChina.class, 2);
 		addCubesCountry(Malaysia.class, NationUS.class, 1);
 
 		addCubesContestedIsland(ScarboroughShoal.class, NationChina.class, 1);
@@ -39,22 +39,19 @@ public class JUnit extends AGameState {
 		addCubesReserve(NationChina.class, 7);
 		addCubesReserve(NationUS.class, 9);
 
-		addCubesPoliticalWarfare(NationChina.class, 1);
+		addCubesPoliticalWarfare(NationChina.class, 3);
 		addCubesPoliticalWarfare(NationUS.class, 1);
 
 		increaseTension(1);
 
-		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
-				.addAllCountriesForDiplomaticCubes().canAddMultipleCubesInTheSameTerritory(false)
-				.buildAndAdd();
+//		proceedToNextGameState();
 
-//		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
-//				.canAddPoliticalWarfare(true).buildAndAdd();
+	}
 
-		Flow.INSTANCE.getFlow().addLast(AddCube.class);
+	@Override
+	protected void handleKeyPressed(KeyCode keyCode) {
 
-//		resolveCardEvent(Card09.class);
-
+		resolveCardEvent(Card12.class);
 		proceedToNextGameState();
 
 	}
