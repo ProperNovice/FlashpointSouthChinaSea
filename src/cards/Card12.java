@@ -3,6 +3,7 @@ package cards;
 import enums.EMode;
 import enums.EScoring;
 import gameStates.AddCube;
+import gameStates.TensionToLow;
 import model.AddInfluenceCubeBuilder;
 import model.OperationValue;
 import nations.Nation;
@@ -38,7 +39,7 @@ public class Card12 extends CardEvent {
 				.addAllCountriesForEconomicCubes().canAddMultipleCubesInTheSameTerritory(false)
 				.buildAndAdd();
 
-		Flow.INSTANCE.getFlow().addFirst(AddCube.class);
+		Flow.INSTANCE.getFlow().addAllFirst(AddCube.class, TensionToLow.class);
 
 	}
 

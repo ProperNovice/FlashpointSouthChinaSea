@@ -88,6 +88,14 @@ public enum TensionManager {
 
 	}
 
+	public void setTensionAnimate(Class<? extends Tension> classTension) {
+
+		for (Tension tension : this.tensionList)
+			if (tension.getClass().equals(classTension))
+				setTensionAnimate(tension);
+
+	}
+
 	public void setTensionAnimate(Tension tension) {
 
 		this.tensionCurrent = tension;

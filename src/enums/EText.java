@@ -14,6 +14,7 @@ public enum EText {
 	YOU_WON("You won", TextTypeEnum.INDICATOR),
 	SELECT_TENSION_LEVEL("Select tension level", TextTypeEnum.INDICATOR),
 	INCREASE_TENSION("Increase tension", TextTypeEnum.INDICATOR),
+	TENSION_TO_LOW("Tension to low", TextTypeEnum.INDICATOR),
 
 	;
 

@@ -2,7 +2,7 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
-import cards.Card10;
+import cards.Card12;
 import cards.CardEvent;
 import components.Cube;
 import components.CubeBlue;
@@ -52,7 +52,7 @@ public class JUnit extends GameState {
 	@Override
 	protected void handleKeyPressed(KeyCode keyCode) {
 
-		resolveCardEvent(Card10.class);
+		resolveCardEvent(Card12.class);
 		Flow.INSTANCE.proceed();
 
 	}
