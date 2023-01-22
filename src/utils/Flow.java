@@ -2,15 +2,15 @@ package utils;
 
 import java.lang.reflect.InvocationTargetException;
 
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 import managers.ObserverManager;
 
 public enum Flow {
 
 	INSTANCE;
 
-	private ArrayList<Class<? extends AGameState>> flow = new ArrayList<>();
-	private AGameState gameStateCurrent = null;
+	private ArrayList<Class<? extends GameState>> flow = new ArrayList<>();
+	private GameState gameStateCurrent = null;
 
 	private Flow() {
 
@@ -25,7 +25,7 @@ public enum Flow {
 
 		ObserverManager.INSTANCE.fireEventGameStateChange();
 
-		Class<? extends AGameState> aGameStateClass = this.flow.removeFirst();
+		Class<? extends GameState> aGameStateClass = this.flow.removeFirst();
 
 		Logger.INSTANCE.log("executing gamestate");
 		Logger.INSTANCE.logNewLine(aGameStateClass.getSimpleName());
@@ -35,18 +35,18 @@ public enum Flow {
 
 	}
 
-	public void executeGameState(Class<? extends AGameState> gameStateClass) {
+	public void executeGameState(Class<? extends GameState> gameStateClass) {
 
 		this.flow.addFirst(gameStateClass);
 		proceed();
 
 	}
 
-	public ArrayList<Class<? extends AGameState>> getFlow() {
+	public ArrayList<Class<? extends GameState>> getFlow() {
 		return this.flow;
 	}
 
-	public AGameState getGameStateCurrent() {
+	public GameState getGameStateCurrent() {
 		return this.gameStateCurrent;
 	}
 
@@ -54,7 +54,7 @@ public enum Flow {
 
 		Logger.INSTANCE.logNewLine("-> printing flow started");
 
-		for (Class<? extends AGameState> classGameState : this.flow)
+		for (Class<? extends GameState> classGameState : this.flow)
 			Logger.INSTANCE.log(classGameState.getSimpleName());
 
 		Logger.INSTANCE.newLine();
@@ -62,7 +62,7 @@ public enum Flow {
 
 	}
 
-	private AGameState getGameState(Class<? extends AGameState> gameStateClass) {
+	private GameState getGameState(Class<? extends GameState> gameStateClass) {
 
 		try {
 

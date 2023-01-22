@@ -1,8 +1,8 @@
 package gameStates;
 
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 
-public class ResolveCardAsOperation extends AGameState {
+public class ResolveCardAsOperation extends GameState {
 
 	@Override
 	public void execute() {

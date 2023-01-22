@@ -11,7 +11,7 @@ import utils.KeyCodeHandler;
 import utils.Logger;
 import utils.Text;
 
-public abstract class AGameState {
+public abstract class GameState {
 
 	public abstract void execute();
 
@@ -56,11 +56,7 @@ public abstract class AGameState {
 		Text.INSTANCE.concealText();
 	}
 
-	protected final void proceedToNextGameState() {
-		Flow.INSTANCE.proceed();
-	}
-
-	protected final ArrayList<Class<? extends AGameState>> getFlow() {
+	protected final ArrayList<Class<? extends GameState>> getFlow() {
 		return Flow.INSTANCE.getFlow();
 	}
 

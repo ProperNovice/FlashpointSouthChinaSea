@@ -1,11 +1,12 @@
 package gameStates;
 
 import enums.EText;
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 import model.TensionManager;
 import tensions.Tension;
+import utils.Flow;
 
-public class TensionToAnyLevel extends AGameState {
+public class TensionToAnyLevel extends GameState {
 
 	@Override
 	public void execute() {
@@ -21,7 +22,7 @@ public class TensionToAnyLevel extends AGameState {
 		concealText();
 		TensionManager.INSTANCE.hideTensionMapPositions();
 		TensionManager.INSTANCE.setTensionAnimate(tension);
-		proceedToNextGameState();
+		Flow.INSTANCE.proceed();
 
 	}
 

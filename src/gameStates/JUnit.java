@@ -2,7 +2,7 @@ package gameStates;
 
 import java.lang.reflect.InvocationTargetException;
 
-import cards.Card12;
+import cards.Card10;
 import cards.CardEvent;
 import components.Cube;
 import components.CubeBlue;
@@ -13,7 +13,7 @@ import contestedIslands.SpratlyIslands;
 import countries.Country;
 import countries.Malaysia;
 import countries.Vietnam;
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 import javafx.scene.input.KeyCode;
 import model.Map;
 import model.NationsManager;
@@ -21,8 +21,9 @@ import model.TensionManager;
 import nations.Nation;
 import nations.NationChina;
 import nations.NationUS;
+import utils.Flow;
 
-public class JUnit extends AGameState {
+public class JUnit extends GameState {
 
 	@Override
 	public void execute() {
@@ -39,20 +40,20 @@ public class JUnit extends AGameState {
 		addCubesReserve(NationChina.class, 7);
 		addCubesReserve(NationUS.class, 9);
 
-		addCubesPoliticalWarfare(NationChina.class, 3);
+//		addCubesPoliticalWarfare(NationChina.class, 3);
 		addCubesPoliticalWarfare(NationUS.class, 1);
 
 		increaseTension(1);
 
-//		proceedToNextGameState();
+		Flow.INSTANCE.proceed();
 
 	}
 
 	@Override
 	protected void handleKeyPressed(KeyCode keyCode) {
 
-		resolveCardEvent(Card12.class);
-		proceedToNextGameState();
+		resolveCardEvent(Card10.class);
+		Flow.INSTANCE.proceed();
 
 	}
 

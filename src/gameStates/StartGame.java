@@ -1,8 +1,8 @@
 package gameStates;
 
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 
-public class StartGame extends AGameState {
+public class StartGame extends GameState {
 
 	@Override
 	public void execute() {

@@ -4,7 +4,7 @@ import enums.EText;
 import utils.Flow;
 import utils.SelectImageViewManager;
 
-public abstract class AEndGame extends AGameState {
+public abstract class AEndGame extends GameState {
 
 	@Override
 	public void execute() {

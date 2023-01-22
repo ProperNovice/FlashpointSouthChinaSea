@@ -3,7 +3,7 @@ package gameStates;
 import components.Cube;
 import contestedIslands.ContestedIsland;
 import countries.Country;
-import gameStatesDefault.AGameState;
+import gameStatesDefault.GameState;
 import model.AddInfluenceCubes;
 import model.AddInfluenceCubesManager;
 import model.Influence;
@@ -15,7 +15,7 @@ import utils.Flow;
 import utils.Logger;
 import utils.SelectImageViewManager;
 
-public class AddCube extends AGameState {
+public class AddCube extends GameState {
 
 	private boolean canAddPoliticalWarfare;
 	private ArrayList<Country> countryEligibleForEconomicInfluence = new ArrayList<>();
@@ -138,12 +138,12 @@ public class AddCube extends AGameState {
 		if (cubesLeftToPlace == 0) {
 
 			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
-			proceedToNextGameState();
+			Flow.INSTANCE.proceed();
 
 		} else if (differentOptions == 0) {
 
 			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
-			proceedToNextGameState();
+			Flow.INSTANCE.proceed();
 
 		} else if (differentOptions == 1) {
 

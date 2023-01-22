@@ -1,9 +1,10 @@
 package gameStatesDefault;
 
 import managers.ObserverManager;
+import utils.Flow;
 import utils.ShutDown;
 
-public class ObserverStatusChange extends AGameState {
+public class ObserverStatusChange extends GameState {
 
 	@Override
 	public void execute() {
@@ -14,7 +15,7 @@ public class ObserverStatusChange extends AGameState {
 		while (!ObserverManager.INSTANCE.observerStatusChange.isEmpty())
 			ObserverManager.INSTANCE.observerStatusChange.removeFirst().run();
 
-		proceedToNextGameState();
+		Flow.INSTANCE.proceed();
 
 	}
 

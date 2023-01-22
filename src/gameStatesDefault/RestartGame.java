@@ -4,7 +4,7 @@ import gameStates.StartGame;
 import utils.Flow;
 import utils.SelectImageViewManager;
 
-public class RestartGame extends AGameState {
+public class RestartGame extends GameState {
 
 	@Override
 	public void execute() {
