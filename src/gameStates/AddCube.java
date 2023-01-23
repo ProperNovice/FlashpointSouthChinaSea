@@ -4,8 +4,8 @@ import components.Cube;
 import contestedIslands.ContestedIsland;
 import countries.Country;
 import gameStatesDefault.GameState;
-import model.AddInfluenceCubes;
-import model.AddInfluenceCubesManager;
+import model.AddMoveInfluenceCubes;
+import model.AddMoveInfluenceCubesManager;
 import model.Influence;
 import model.Map;
 import model.NationsManager;
@@ -35,17 +35,17 @@ public class AddCube extends GameState {
 	public void handleCountryInfluenceEconomicPressed(Country country) {
 
 		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
-		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.cubeAddedEconomic(country.getClass());
 
 		Cube cube = getNationCube();
 
 		country.getNationInfluenceEconomic()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().getArrayList().addLast(cube);
 
 		country.getNationInfluenceEconomic()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().animateSynchronousLock();
 
 		Flow.INSTANCE.executeGameState(AddCube.class);
@@ -56,17 +56,17 @@ public class AddCube extends GameState {
 	public void handleCountryInfluenceDiplomaticPressed(Country country) {
 
 		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
-		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.cubeAddedDiplomatic(country.getClass());
 
 		Cube cube = getNationCube();
 
 		country.getNationInfluenceDiplomatic()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().getArrayList().addLast(cube);
 
 		country.getNationInfluenceDiplomatic()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().animateSynchronousLock();
 
 		Flow.INSTANCE.executeGameState(AddCube.class);
@@ -77,17 +77,17 @@ public class AddCube extends GameState {
 	public void handleContestedIslandPressed(ContestedIsland contestedIsland) {
 
 		SelectImageViewManager.INSTANCE.releaseSelectImageViews();
-		AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.cubeAddedContestedIsland(contestedIsland.getClass());
 
 		Cube cube = getNationCube();
 
 		contestedIsland.getNationInfluence()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().getArrayList().addLast(cube);
 
 		contestedIsland.getNationInfluence()
-				.getValue(AddInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
+				.getValue(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().getNationClass())
 				.getListCubes().animateSynchronousLock();
 
 		Flow.INSTANCE.executeGameState(AddCube.class);
@@ -96,9 +96,9 @@ public class AddCube extends GameState {
 
 	private void handlePoliticalWarfarePressed() {
 
-		AddInfluenceCubesManager.INSTANCE.getList().getFirst().cubeAddedPoliticalWarfare();
+		AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().cubeAddedPoliticalWarfare();
 
-		Class<? extends Nation> classNation = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		Class<? extends Nation> classNation = AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.getNationClass();
 		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
@@ -112,7 +112,7 @@ public class AddCube extends GameState {
 
 	private Cube getNationCube() {
 
-		Class<? extends Nation> classNation = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		Class<? extends Nation> classNation = AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.getNationClass();
 		Nation nation = NationsManager.INSTANCE.getNation(classNation);
 
@@ -125,7 +125,7 @@ public class AddCube extends GameState {
 
 	private void handleOptions() {
 
-		int cubesLeftToPlace = AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		int cubesLeftToPlace = AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.getCubesLeftToAdd();
 
 		int differentOptions = this.countryEligibleForEconomicInfluence.size()
@@ -137,12 +137,12 @@ public class AddCube extends GameState {
 
 		if (cubesLeftToPlace == 0) {
 
-			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
+			AddMoveInfluenceCubesManager.INSTANCE.getList().removeFirst();
 			Flow.INSTANCE.proceed();
 
 		} else if (differentOptions == 0) {
 
-			AddInfluenceCubesManager.INSTANCE.getList().removeFirst();
+			AddMoveInfluenceCubesManager.INSTANCE.getList().removeFirst();
 			Flow.INSTANCE.proceed();
 
 		} else if (differentOptions == 1) {
@@ -177,7 +177,7 @@ public class AddCube extends GameState {
 	private void printEligibles() {
 
 		Logger.INSTANCE.logNewLine("* eligibles printing *");
-		Logger.INSTANCE.logNewLine(AddInfluenceCubesManager.INSTANCE.getList().getFirst()
+		Logger.INSTANCE.logNewLine(AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst()
 				.getNationClass().getSimpleName());
 
 		// country influence economic
@@ -230,7 +230,7 @@ public class AddCube extends GameState {
 
 	private void setUpEligibility() {
 
-		AddInfluenceCubes addInfluenceCubes = AddInfluenceCubesManager.INSTANCE.getList()
+		AddMoveInfluenceCubes addInfluenceCubes = AddMoveInfluenceCubesManager.INSTANCE.getList()
 				.getFirst();
 		Class<? extends Nation> classNation = addInfluenceCubes.getNationClass();
 

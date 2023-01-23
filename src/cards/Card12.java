@@ -4,7 +4,7 @@ import enums.EMode;
 import enums.EScoring;
 import gameStates.AddCube;
 import gameStates.TensionToLow;
-import model.AddInfluenceCubeBuilder;
+import model.AddMoveInfluenceCubeBuilder;
 import model.OperationValue;
 import nations.Nation;
 import nations.NationChina;
@@ -35,7 +35,7 @@ public class Card12 extends CardEvent {
 	@Override
 	public void resolveEvent() {
 
-		new AddInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(2)
+		new AddMoveInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(2)
 				.addAllCountriesForEconomicCubes().canAddMultipleCubesInTheSameTerritory(false)
 				.buildAndAdd();
 

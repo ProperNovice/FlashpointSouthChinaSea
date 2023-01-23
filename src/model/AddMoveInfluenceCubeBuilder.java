@@ -14,7 +14,7 @@ import nations.Nation;
 import utils.ArrayList;
 import utils.ShutDown;
 
-public class AddInfluenceCubeBuilder {
+public class AddMoveInfluenceCubeBuilder {
 
 	private Class<? extends Nation> nationClass = null;
 	private int cubesToAdd = -1;
@@ -26,7 +26,7 @@ public class AddInfluenceCubeBuilder {
 	private ArrayList<Class<? extends Country>> allCountries = new ArrayList<>();
 	private ArrayList<Class<? extends ContestedIsland>> allContestedIslands = new ArrayList<>();
 
-	public AddInfluenceCubeBuilder() {
+	public AddMoveInfluenceCubeBuilder() {
 
 		// add all countries
 
@@ -44,69 +44,69 @@ public class AddInfluenceCubeBuilder {
 
 	}
 
-	public AddInfluenceCubeBuilder setNationClass(Class<? extends Nation> nationClass) {
+	public AddMoveInfluenceCubeBuilder setNationClass(Class<? extends Nation> nationClass) {
 		this.nationClass = nationClass;
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder setCubesToAdd(int cubesToAdd) {
+	public AddMoveInfluenceCubeBuilder setCubesToAdd(int cubesToAdd) {
 		this.cubesToAdd = cubesToAdd;
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder canAddMultipleCubesInTheSameTerritory(
+	public AddMoveInfluenceCubeBuilder canAddMultipleCubesInTheSameTerritory(
 			boolean canAddMultipleCubesInTheSameTerritory) {
 		this.canAddMultipleCubesInTheSameTerritory = canAddMultipleCubesInTheSameTerritory;
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder canAddPoliticalWarfare(boolean canAddPoliticalWarfare) {
+	public AddMoveInfluenceCubeBuilder canAddPoliticalWarfare(boolean canAddPoliticalWarfare) {
 		this.canAddPoliticalWarfare = canAddPoliticalWarfare;
 		return this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public AddInfluenceCubeBuilder addCountryForEconomicCube(Class<? extends Country>... classes) {
+	public AddMoveInfluenceCubeBuilder addCountryForEconomicCube(Class<? extends Country>... classes) {
 		this.countriesToAddEconomicCube.addAllLast(classes);
 		return this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public AddInfluenceCubeBuilder addCountryForDiplomaticCube(
+	public AddMoveInfluenceCubeBuilder addCountryForDiplomaticCube(
 			Class<? extends Country>... classes) {
 		this.countriesToAddDiplomaticCube.addAllLast(classes);
 		return this;
 	}
 
 	@SuppressWarnings("unchecked")
-	public AddInfluenceCubeBuilder addContestedIslandCube(
+	public AddMoveInfluenceCubeBuilder addContestedIslandCube(
 			Class<? extends ContestedIsland>... classes) {
 		this.contestedIslandsToAddCube.addAllLast(classes);
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder addAllCountriesForEconomicCubes() {
+	public AddMoveInfluenceCubeBuilder addAllCountriesForEconomicCubes() {
 		this.countriesToAddEconomicCube.addAllLast(this.allCountries);
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder addAllCountriesForDiplomaticCubes() {
+	public AddMoveInfluenceCubeBuilder addAllCountriesForDiplomaticCubes() {
 		this.countriesToAddDiplomaticCube.addAllLast(this.allCountries);
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder addAllContestedIslands() {
+	public AddMoveInfluenceCubeBuilder addAllContestedIslands() {
 		this.contestedIslandsToAddCube.addAllLast(this.allContestedIslands);
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder addAllCountriesForBothEconomicAndDiplomaticCubes() {
+	public AddMoveInfluenceCubeBuilder addAllCountriesForBothEconomicAndDiplomaticCubes() {
 		addAllCountriesForEconomicCubes();
 		addAllCountriesForDiplomaticCubes();
 		return this;
 	}
 
-	public AddInfluenceCubeBuilder addAllCountriesAndContestedIslands() {
+	public AddMoveInfluenceCubeBuilder addAllCountriesAndContestedIslands() {
 		addAllCountriesForEconomicCubes();
 		addAllCountriesForDiplomaticCubes();
 		addAllContestedIslands();
@@ -118,12 +118,12 @@ public class AddInfluenceCubeBuilder {
 		if (this.nationClass == null || this.cubesToAdd == -1)
 			ShutDown.INSTANCE.execute();
 
-		AddInfluenceCubes addInfluenceCubes = new AddInfluenceCubes(this.nationClass,
+		AddMoveInfluenceCubes addInfluenceCubes = new AddMoveInfluenceCubes(this.nationClass,
 				this.cubesToAdd, this.canAddMultipleCubesInTheSameTerritory,
 				this.canAddPoliticalWarfare, this.countriesToAddEconomicCube,
 				this.countriesToAddDiplomaticCube, contestedIslandsToAddCube);
 
-		AddInfluenceCubesManager.INSTANCE.addInfluenceCubeAction(addInfluenceCubes);
+		AddMoveInfluenceCubesManager.INSTANCE.addInfluenceCubeAction(addInfluenceCubes);
 
 	}
 
