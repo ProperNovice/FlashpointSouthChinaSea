@@ -4,6 +4,7 @@ import enums.EText;
 import gameStatesDefault.GameState;
 import model.TensionManager;
 import tensions.Tension;
+import utils.Flow;
 import utils.Text;
 
 public abstract class TensionToLevelSet extends GameState {
@@ -18,9 +19,10 @@ public abstract class TensionToLevelSet extends GameState {
 
 	@Override
 	protected void executeTextOption(EText eText) {
-		
+
 		Text.INSTANCE.concealText();
 		TensionManager.INSTANCE.setTensionAnimate(getTensionClass());
+		Flow.INSTANCE.proceed();
 
 	}
 
