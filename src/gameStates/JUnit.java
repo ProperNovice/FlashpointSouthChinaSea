@@ -46,11 +46,12 @@ public class JUnit extends GameState {
 
 		increaseTension(1);
 
-		new AddMoveInfluenceCubeBuilder().addAllCountriesForDiplomaticCubes()
-				.setNationClass(NationUS.class).setCubesToAdd(3).buildAndAdd();
+		new AddMoveInfluenceCubeBuilder().canAddMultipleCubesInTheSameTerritory(false)
+				.addAllCountriesAndContestedIslands().setNationClass(NationUS.class)
+				.setCubesToAdd(3).buildAndAdd();
 
-//		Flow.INSTANCE.executeGameState(AddCube.class);
-		Flow.INSTANCE.executeGameState(MoveCube.class);
+		Flow.INSTANCE.executeGameState(AddCube.class);
+//		Flow.INSTANCE.executeGameState(MoveCube.class);
 
 	}
 
