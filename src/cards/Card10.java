@@ -2,7 +2,7 @@ package cards;
 
 import enums.EMode;
 import enums.EScoring;
-import gameStates.AddCube;
+import gameStates.AddMoveCube;
 import gameStates.IncreaseTension;
 import model.AddMoveInfluenceCubeBuilder;
 import model.OperationValue;
@@ -38,7 +38,7 @@ public class Card10 extends CardEvent {
 		new AddMoveInfluenceCubeBuilder().setNationClass(NationChina.class).setCubesToAdd(3)
 				.canAddPoliticalWarfare(true).buildAndAdd();
 
-		Flow.INSTANCE.getFlow().addAllFirst(AddCube.class, IncreaseTension.class);
+		Flow.INSTANCE.getFlow().addAllFirst(AddMoveCube.class, IncreaseTension.class);
 
 	}
 

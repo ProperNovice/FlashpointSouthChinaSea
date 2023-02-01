@@ -15,6 +15,7 @@ import countries.Malaysia;
 import countries.Vietnam;
 import gameStatesDefault.GameState;
 import javafx.scene.input.KeyCode;
+import model.AddMoveInfluenceCubeBuilder;
 import model.Map;
 import model.NationsManager;
 import model.TensionManager;
@@ -45,7 +46,11 @@ public class JUnit extends GameState {
 
 		increaseTension(1);
 
-		Flow.INSTANCE.proceed();
+		new AddMoveInfluenceCubeBuilder().addAllCountriesForDiplomaticCubes()
+				.setNationClass(NationUS.class).setCubesToAdd(3).buildAndAdd();
+
+//		Flow.INSTANCE.executeGameState(AddCube.class);
+		Flow.INSTANCE.executeGameState(MoveCube.class);
 
 	}
 

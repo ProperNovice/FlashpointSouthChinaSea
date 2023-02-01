@@ -7,7 +7,7 @@ import countries.Philippines;
 import countries.Vietnam;
 import enums.EMode;
 import enums.EScoring;
-import gameStates.AddCube;
+import gameStates.AddMoveCube;
 import model.AddMoveInfluenceCubeBuilder;
 import model.OperationValue;
 import nations.Nation;
@@ -48,7 +48,7 @@ public class Card11 extends CardEvent {
 						Vietnam.class)
 				.canAddMultipleCubesInTheSameTerritory(false).buildAndAdd();
 
-		Flow.INSTANCE.getFlow().addAllFirst(AddCube.class, AddCube.class);
+		Flow.INSTANCE.getFlow().addAllFirst(AddMoveCube.class, AddMoveCube.class);
 
 	}
 
