@@ -30,7 +30,7 @@ public class JUnit extends GameState {
 	public void execute() {
 
 		addCubesCountry(Vietnam.class, NationChina.class, 2);
-		addCubesCountry(Malaysia.class, NationUS.class, 1);
+		addCubesCountry(Malaysia.class, NationUS.class, 2);
 
 		addCubesContestedIsland(ScarboroughShoal.class, NationChina.class, 1);
 		addCubesContestedIsland(SpratlyIslands.class, NationUS.class, 1);
@@ -48,7 +48,7 @@ public class JUnit extends GameState {
 
 		new AddMoveInfluenceCubeBuilder().canAddMultipleCubesInTheSameTerritory(false)
 				.addAllCountriesAndContestedIslands().setNationClass(NationUS.class)
-				.setCubesToAdd(3).buildAndAdd();
+				.setCubesToAdd(4).buildAndAdd();
 
 //		Flow.INSTANCE.executeGameState(AddCube.class);
 		Flow.INSTANCE.executeGameState(MoveCube.class);
