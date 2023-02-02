@@ -50,8 +50,8 @@ public class JUnit extends GameState {
 				.addAllCountriesAndContestedIslands().setNationClass(NationUS.class)
 				.setCubesToAdd(3).buildAndAdd();
 
-		Flow.INSTANCE.executeGameState(AddCube.class);
-//		Flow.INSTANCE.executeGameState(MoveCube.class);
+//		Flow.INSTANCE.executeGameState(AddCube.class);
+		Flow.INSTANCE.executeGameState(MoveCube.class);
 
 	}
 

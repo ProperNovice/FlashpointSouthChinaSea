@@ -31,7 +31,9 @@ public abstract class AddMoveCube extends GameState {
 
 	}
 
-	protected abstract void handlePoliticalWarfarePressed();
+	protected void handlePoliticalWarfarePressed() {
+
+	}
 
 	private void handleOptions() {
 

@@ -81,7 +81,6 @@ public class AddCube extends AddMoveCube {
 
 	}
 
-	@Override
 	protected void handlePoliticalWarfarePressed() {
 
 		AddMoveInfluenceCubesManager.INSTANCE.getList().getFirst().cubeAddedPoliticalWarfare();
